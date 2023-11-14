@@ -37,13 +37,8 @@
     const chosenChallenge = answers.chooseAChallenge;
 let updatedIntegrity;
     if (chosenChallenge === "1") {
-         updatedIntegrity = lock.reduceIntegrity();
-
-        backToDoor(
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
-            console.log(`${lock.doorStats()}`)
-        );
-
+            updatedIntegrity = lock.reduceIntegrity();
+             challengeOne(chosenChallenge);
     }
         if (chosenChallenge === "2") {
             updatedIntegrity = lock.reduceIntegrity();
@@ -51,60 +46,92 @@ let updatedIntegrity;
         }
         if (chosenChallenge ==="3") {
             updatedIntegrity = lock.reduceIntegrity();
-            backToDoor(
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
-            console.log(`${lock.doorStats()}`))//PLACEHOLDER
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            console.log(`${lock.doorStats()}`);
+            backToDoor();//PLACEHOLDER
         
             
         }
         if (chosenChallenge ==="4") {
             updatedIntegrity = lock.reduceIntegrity();
-            backToDoor(
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
-            console.log(`${lock.doorStats()}`))//PLACEHOLDER
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            console.log(`${lock.doorStats()}`);
+            backToDoor()//PLACEHOLDER
         
             
         }
         if (chosenChallenge ==="5") {
             updatedIntegrity = lock.reduceIntegrity();
-            backToDoor(
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
-            console.log(`${lock.doorStats()}`))//PLACEHOLDER
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            console.log(`${lock.doorStats()}`);
+            backToDoor()//PLACEHOLDER
         
             
         }
         if (chosenChallenge ==="6") {
             updatedIntegrity = lock.reduceIntegrity();
-            backToDoor(
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
-            console.log(`${lock.doorStats()}`))//PLACEHOLDER
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            console.log(`${lock.doorStats()}`);
+            backToDoor()//PLACEHOLDER
             
         }
     }
     
     function ChallengeTwo(chosenChallenge) {
-        let updatedIntegrity;
-        inquirer
-            .prompt([
-                {
-                    type: "input",
-                    name: "chalTwo",
-                    message: "A dusty note attached to a letter combination lock reads; `if yOu can deciPher me, you might havE a chaNce at walking free`. How do you answer?",
-                },
-            ])
-            .then((answersChallengeTwo) => {
-                const chalTwo = answersChallengeTwo.chalTwo;
-                if (chalTwo.toUpperCase() === "OPEN") {
-                    console.log("The lock breaks, and a key falls from it! Lock two is open.");
-                    backToDoor(availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
-                    updatedIntegrity,console.log(`${lock.doorStats()}`))
-                
-                } else {
-                    console.log("Incorrect answer. The lock remains closed.");
-                }
-            });
+        function askQuestion() {    // we do some recursion 
+            inquirer
+                .prompt([
+                    {
+                        type: "input",
+                        name: "chalTwo",
+                        message: "A dusty note attached to a letter combination lock reads; `if yOu can deciPher me, you might havE a chaNce at walking free`. How do you answer?",
+                    },
+                ])
+                .then((answersChallengeTwo) => {
+                    const chalTwo = answersChallengeTwo.chalTwo;
+                    if (chalTwo.toUpperCase() === "OPEN") {
+                        console.log("The lock breaks, and a key falls from it! Lock two is open.");
+                        availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+                        console.log(`${lock.doorStats()}`);
+                        backToDoor();
+                    } else {
+                        console.log("Incorrect answer. Try again!");
+                        askQuestion(); // Recursively call askQuestion again
+                    }
+                });
+        }
+    
+        askQuestion(); // Initial call to start the question loop
     }
 
-backToDoor();
+
+async function challengeOne(chosenChallenge){
+    function askQuestion() {
+    let itemAnswer;
+let availableitems = ["Witch's Finger","Goat Skull","Fairy Dust","Newt's Eyes","Rabbit's foot"]
+inquirer
+    .prompt([{
+        type:"list",
+        name: "oddOneOut",
+        choices: availableitems,
+        message:"One of these items does not belong, make the right choice and you may find a key to freedom.."
+    },
+    ])
+    .then((answerschallengeOne) => {
+         itemAnswer = answerschallengeOne.oddOneOut
+        if (itemAnswer === "Fairy Dust") {
+            console.log("You find a key underneath the bag of Fairy Dust!")
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            console.log(`${lock.doorStats()}`);
+            backToDoor();
+        } else {
+            console.log("Incorrect answer. The lock remains closed.");
+            askQuestion(); // Recursively call askQuestion again
+        }
+    });
+}
+askQuestion();
+}
+backToDoor()
 
 
