@@ -26,7 +26,7 @@
         return;
     }
 
-    const answers = await inquirer.prompt([
+    const answers = await inquirer.prompt([ //needs to be async/await for the prompt to work 
         {
             type: "list",
             name: "chooseAChallenge",
@@ -34,21 +34,21 @@
         },
     ]);
 
-    const chosenChallenge = answers.chooseAChallenge;
-let updatedIntegrity;
+    const chosenChallenge = answers.chooseAChallenge; //sets the value of chosenChallenge to your challenge choice from the inquirer prompt
+let updatedIntegrity; // need to declare outside of functions
     if (chosenChallenge === "1") {
-            updatedIntegrity = lock.reduceIntegrity();
+            updatedIntegrity = lock.reduceIntegrity(); //after a challenge is completed, lock.reduceIntegrity decreases Integrity attribute and returns the value for it to be reused in new challenges
              challengeOne(chosenChallenge);
     }
         if (chosenChallenge === "2") {
             updatedIntegrity = lock.reduceIntegrity();
-             ChallengeTwo(chosenChallenge);
+             ChallengeTwo(chosenChallenge); //calls challengeTwo and passes the value of chosenChallenge (the number of the challenge you chose from the prompt) through the function 
         }
         if (chosenChallenge ==="3") {
             updatedIntegrity = lock.reduceIntegrity();
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
             console.log(`${lock.doorStats()}`);
-            backToDoor();//PLACEHOLDER
+            backToDoor();//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
         
             
         }
@@ -56,7 +56,7 @@ let updatedIntegrity;
             updatedIntegrity = lock.reduceIntegrity();
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
             console.log(`${lock.doorStats()}`);
-            backToDoor()//PLACEHOLDER
+            backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
         
             
         }
@@ -64,7 +64,7 @@ let updatedIntegrity;
             updatedIntegrity = lock.reduceIntegrity();
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
             console.log(`${lock.doorStats()}`);
-            backToDoor()//PLACEHOLDER
+            backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
         
             
         }
@@ -72,13 +72,13 @@ let updatedIntegrity;
             updatedIntegrity = lock.reduceIntegrity();
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
             console.log(`${lock.doorStats()}`);
-            backToDoor()//PLACEHOLDER
+            backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
             
         }
     }
     
     function ChallengeTwo(chosenChallenge) {
-        function askQuestion() {    // we do some recursion 
+        function askQuestion() {    //recursion
             inquirer
                 .prompt([
                     {
@@ -89,13 +89,13 @@ let updatedIntegrity;
                 ])
                 .then((answersChallengeTwo) => {
                     const chalTwo = answersChallengeTwo.chalTwo;
-                    if (chalTwo.toUpperCase() === "OPEN") {
-                        console.log("The lock breaks, and a key falls from it! Lock two is open.");
-                        availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-                        console.log(`${lock.doorStats()}`);
-                        backToDoor();
+                    if (chalTwo.toUpperCase() === "OPEN") { //changes the input to uppercase so no errors
+                        console.log("The lock breaks, and a key falls from it! Lock two is open."); 
+                        availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); // removes the challenge you just completed from the array when successful
+                        console.log(`${lock.doorStats()}`); // notifies player of current door integrity
+                        backToDoor(); //recursive, allows the user to loop back to the inquirer prompt and select another challenge 
                     } else {
-                        console.log("Incorrect answer. Try again!");
+                        console.log("Incorrect answer. Try again!"); 
                         askQuestion(); // Recursively call askQuestion again
                     }
                 });
@@ -107,8 +107,8 @@ let updatedIntegrity;
 
 async function challengeOne(chosenChallenge){
     function askQuestion() {
-    let itemAnswer;
-let availableitems = ["Witch's Finger","Goat Skull","Fairy Dust","Newt's Eyes","Rabbit's foot"]
+    let itemAnswer;//declaring outside of .then() 
+let availableitems = ["Witch's Finger","Goat Skull","Fairy Dust","Newt's Eyes","Rabbit's foot"] //array that will be the multiple choice answers to the riddle
 inquirer
     .prompt([{
         type:"list",
@@ -118,10 +118,10 @@ inquirer
     },
     ])
     .then((answerschallengeOne) => {
-         itemAnswer = answerschallengeOne.oddOneOut
+         itemAnswer = answerschallengeOne.oddOneOut //sets the value of item answer to the users prompt answer
         if (itemAnswer === "Fairy Dust") {
             console.log("You find a key underneath the bag of Fairy Dust!")
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
             console.log(`${lock.doorStats()}`);
             backToDoor();
         } else {
@@ -132,6 +132,7 @@ inquirer
 }
 askQuestion();
 }
-backToDoor()
+
+backToDoor()// call at the end to generate your recursive game choices -> game -> choices loop
 
 
