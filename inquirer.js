@@ -1,10 +1,10 @@
 
     import inquirer from 'inquirer';
     import { Lock } from "./classes.js"
-    const lock = new Lock();
-    export let playerName;
-    let availableChallenges = ["1","2","3","4","5","6"]
-    async function start(){
+    const lock = new Lock(); //creates Lock Subclass 
+    export let playerName; //declares playerName before it is used in start() so the value can be used in greet, while also exporting itself. 
+    let availableChallenges = ["1","2","3","4","5","6"] //array of challenges, used later in a list inquirer.
+    async function start(){ //initialises the game by asking for player input
         const answers = await inquirer
         .prompt([{
             type:"input",
@@ -12,24 +12,24 @@
             message:"What is your name?",
         },
         ]);
-       playerName = answers.Introduction
+       playerName = answers.Introduction // takes input value from promt "introduction"
     }
     
-    async function greet(){
+    async function greet(){ //greet runs start by awaiting it 
         await start()
     console.log(`Welcome ${playerName}, to the Haunted Hotel! You must recover 6 keys to unlock the door and leave. The door's integrity will weaken with each lock broken. ${String(lock.doorStats())}`)
     }
     await greet()
-    async function backToDoor(){
+    async function backToDoor(){ //backToDoor runs greet, generates challenge list and loops back to challenge list once one has been complete
         const answers = await inquirer.prompt([
             {
                 type:"list",
                 name:"chooseAChallenge",
-                choices:availableChallenges,
+                choices:availableChallenges, //choose 1-6
             }
         ]);
         const chosenChallenge = answers.chooseAChallenge;
-        if (chosenChallenge === "1") {backToDoor(availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),lock.reduceIntegrity(),
+        if (chosenChallenge === "1") {backToDoor(availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),lock.reduceIntegrity(), //function called from classes.js
             console.log(`${lock.doorStats()}`)) //PLACEHOLDER
         
 

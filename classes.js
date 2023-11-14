@@ -1,5 +1,13 @@
 import {playerName} from "./inquirer.js";
 
+function endGame(){
+    return(`Congratulations ${playerName}, you've escaped!`);
+}
+
+
+
+
+
 class Door {
     constructor() {
         this.integrity =  90;
@@ -7,7 +15,8 @@ class Door {
 
     doorStats() {
         if (this.integrity <= 0) {
-            return(`Congratulations ${playerName}, you've escaped!`);}
+            return(`Congratulations ${playerName}, you've escaped!`);
+            }
             else {
         return `Door integrity currently ${this.integrity}`;}
     }
