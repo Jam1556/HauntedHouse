@@ -78,32 +78,36 @@ let updatedIntegrity;
     }
     
     function ChallengeTwo(chosenChallenge) {
-        let updatedIntegrity;
-        inquirer
-            .prompt([
-                {
-                    type: "input",
-                    name: "chalTwo",
-                    message: "A dusty note attached to a letter combination lock reads; `if yOu can deciPher me, you might havE a chaNce at walking free`. How do you answer?",
-                },
-            ])
-            .then((answersChallengeTwo) => {
-                const chalTwo = answersChallengeTwo.chalTwo;
-                if (chalTwo.toUpperCase() === "OPEN") {
-                    console.log("The lock breaks, and a key falls from it! Lock two is open.");
-                    backToDoor(availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
-                    updatedIntegrity,console.log(`${lock.doorStats()}`))
-                
-                } else {
-                    console.log("Incorrect answer. The lock remains closed."), ChallengeTwo();
-
-                }
-            });
+        function askQuestion() {    // we do some recursion 
+            inquirer
+                .prompt([
+                    {
+                        type: "input",
+                        name: "chalTwo",
+                        message: "A dusty note attached to a letter combination lock reads; `if yOu can deciPher me, you might havE a chaNce at walking free`. How do you answer?",
+                    },
+                ])
+                .then((answersChallengeTwo) => {
+                    const chalTwo = answersChallengeTwo.chalTwo;
+                    if (chalTwo.toUpperCase() === "OPEN") {
+                        console.log("The lock breaks, and a key falls from it! Lock two is open.");
+                        availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+                        console.log(`${lock.doorStats()}`);
+                        backToDoor();
+                    } else {
+                        console.log("Incorrect answer. Try again!");
+                        askQuestion(); // Recursively call askQuestion again
+                    }
+                });
+        }
+    
+        askQuestion(); // Initial call to start the question loop
     }
 
-    let itemAnswer;
-    let availableitems = ["Witch's Finger","Goat Skull","Fairy Dust","Newt's Eyes","Rabbit's foot"]
-    async function challengeOne(chosenChallenge){
+    async function challengeOne(chosenChallenge){    
+        function askQuestion(){
+        let itemAnswer;
+        let availableitems = ["Witch's Finger","Goat Skull","Fairy Dust","Newt's Eyes","Rabbit's foot"]
         inquirer
         .prompt([{
             type:"list",
@@ -121,10 +125,10 @@ let updatedIntegrity;
                     console.log(`${lock.doorStats()}`))
             
             } else {
-                console.log("Incorrect answer. The lock remains closed.");challengeOne()
+                console.log("Incorrect answer. The lock remains closed.");askQuestion()
             }
         });
     }
+    askQuestion();
+    }
     backToDoor()
-
-
