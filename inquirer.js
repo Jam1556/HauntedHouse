@@ -38,12 +38,7 @@
 let updatedIntegrity;
     if (chosenChallenge === "1") {
          updatedIntegrity = lock.reduceIntegrity();
-
-        backToDoor(
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
-            console.log(`${lock.doorStats()}`)
-        );
-
+         challengeOne(chosenChallenge)
     }
         if (chosenChallenge === "2") {
             updatedIntegrity = lock.reduceIntegrity();
@@ -100,11 +95,36 @@ let updatedIntegrity;
                     updatedIntegrity,console.log(`${lock.doorStats()}`))
                 
                 } else {
-                    console.log("Incorrect answer. The lock remains closed.");
+                    console.log("Incorrect answer. The lock remains closed."), ChallengeTwo();
+
                 }
             });
     }
 
-backToDoor();
+    let itemAnswer;
+    let availableitems = ["Witch's Finger","Goat Skull","Fairy Dust","Newt's Eyes","Rabbit's foot"]
+    async function challengeOne(chosenChallenge){
+        inquirer
+        .prompt([{
+            type:"list",
+            name: "oddOneOut",
+            choices: availableitems,
+            message:"One of these items does not belong, make the right choice and you may find a key to freedom.."
+        }
+        ])
+        .then((answerschallengeOne) => {
+            itemAnswer = answerschallengeOne.oddOneOut
+            if (itemAnswer === "Fairy Dust") {
+                console.log("The lock breaks, and a key falls from it! Lock two is open.");
+                backToDoor(
+                    availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge),
+                    console.log(`${lock.doorStats()}`))
+            
+            } else {
+                console.log("Incorrect answer. The lock remains closed.");challengeOne()
+            }
+        });
+    }
+    backToDoor()
 
 
