@@ -1,2 +1,2 @@
-// blah blah
-console.log('run please')
+import { runChallenge } from "./functions.js";
+runChallenge()
