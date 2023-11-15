@@ -63,18 +63,12 @@ let updatedIntegrity; // need to declare outside of functions
         }
         if (chosenChallenge ==="5") {
             updatedIntegrity = lock.reduceIntegrity();
-            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            // console.log(`${lock.doorStats()}`);
-            // backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
             challengeFive(chosenChallenge);
         
             
         }
         if (chosenChallenge ==="6") {
             updatedIntegrity = lock.reduceIntegrity();
-            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            // console.log(`${lock.doorStats()}`);
-            // backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
             challengeSix(chosenChallenge);
             
         }
@@ -144,21 +138,22 @@ async function challengeFive(chosenChallenge){
 inquirer
     .prompt([{
         type:"confirm",
-        name: "openBox",
-        message:"Will you open the box?"
+        name: "statue",
+        message:"You come across a grand statue of a female warrior, her hands are empty.. \nA  worn sword lays on the ground next to her. Will you place the sword in her empty hands?"
     },
     ])
     .then((answerschallengeFive) => {
-         answerBool = answerschallengeFive.openBox //sets the value of item answer to the users prompt answer
-         console.log(answerBool)
+         answerBool = answerschallengeFive.statue //sets the value of item answer to the users prompt answer. 
+         //console.log(answerBool)
         if (answerBool === true) {
-            console.log(chalk.blue.bold("You find a new key!"))
-            console.log(chalk.red.bold(" .-.\n(o o) boo!\n| O |\n|   |\n`~~~'"))
+            console.log(chalk.cyan.bold("The sword activates the statue; releasing a new key!"))
+            //console.log(chalk.red.bold(" .-.\n(o o) boo!\n| O |\n|   |\n`~~~'"))
+            console.log(chalk.green.bold("  8 8          ,o.\n d8o8azzzzzzzzd   b\n               `o' "))
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
             console.log(`${lock.doorStats()}`);
             backToDoor();
         } else {
-            console.log("Incorrect answer. Try again.");
+            console.log(chalk.yellowBright.bold("Nothing happens.. Try again."));
             askQuestion(); // Recursively call askQuestion again
         }
     });
@@ -168,24 +163,26 @@ askQuestion();
 
 async function challengeSix(chosenChallenge){
     function askQuestion() {
-    let answerBool;//declaring outside of .then() 
+    let autopsyAnswer;//declaring outside of .then() 
 inquirer
     .prompt([{
-        type:"confirm",
-        name: "openBox2",
-        message:"Will you open the box?"
+        type:"list",
+        name: "autopsy",
+        message:"You find a human sized doll that appears to have been used for surgical practice.\n Will you unstitch the fresh work?",
+        choices: ['left leg', 'chest', 'head', 'stomach', 'throat']
     },
     ])
     .then((answerschallengeSix) => {
-         answerBool = answerschallengeSix.openBox2 //sets the value of item answer to the users prompt answer
-         console.log(answerBool)
-        if (answerBool === false) {
-            console.log("You find a new key!")
+         autopsyAnswer = answerschallengeSix.autopsy //sets the value of item answer to the users prompt answer
+         //console.log(autopsyAnswer)
+        if (autopsyAnswer === 'stomach') {
+            console.log(chalk.cyan.bold("Nesteled between dirty bandages and rotten flesh; you find a New Key."))
+            console.log(chalk.green.bold("  8 8          ,o.\n d8o8azzzzzzzzd   b\n               `o' "))
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
             console.log(`${lock.doorStats()}`);
             backToDoor();
         } else {
-            console.log("Incorrect answer. Try again.");
+            console.log(chalk.yellowBright.bold("Nothing unusual here. Try again."));
             askQuestion(); // Recursively call askQuestion again
         }
     });
