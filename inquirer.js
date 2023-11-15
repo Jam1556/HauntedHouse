@@ -143,20 +143,28 @@ askQuestion();
 
 async function challengeThree(chosenChallenge){
     function askQuestion(){
-    let answer; //declaring outside of .then()
         inquirer
         .prompt([{
             type:"input",
             name:"challthree",
-            message:"Which operator will transform the current number into a number that is associated with the devil?",
+            message:"Which operator will transform the number 333 (if given the number 2 as well) into a number that is associated with the devil?",
         },
     ])
     .then((answersChallengeThree) => {
-
-    })
+        const challThree = answersChallengeThree.challThree;
+        if (challThree === "*") {   // Multiplies it 
+            console.log("Correct! A key appears before you!");
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            console.log(`${lock.doorStats()}`);
+            backToDoor();
+        } else {
+            console.log("Incorrect, try again!");
+            askQuestion(); // Goes back to the start of challenge 3
+        }
+    });
     
 }
-askQuestion();
+askQuestion(); // Calls the function
 }
 
 async function challengeFour(chosenChallenge){
