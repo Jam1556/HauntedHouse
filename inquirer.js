@@ -62,17 +62,19 @@ let updatedIntegrity; // need to declare outside of functions
         }
         if (chosenChallenge ==="5") {
             updatedIntegrity = lock.reduceIntegrity();
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            console.log(`${lock.doorStats()}`);
-            backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            // console.log(`${lock.doorStats()}`);
+            // backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            challengeFive(chosenChallenge);
         
             
         }
         if (chosenChallenge ==="6") {
             updatedIntegrity = lock.reduceIntegrity();
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            console.log(`${lock.doorStats()}`);
-            backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            // console.log(`${lock.doorStats()}`);
+            // backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            challengeSix(chosenChallenge);
             
         }
     }
@@ -133,6 +135,63 @@ inquirer
 askQuestion();
 }
 
+//-------Kev Challenges (5 and 6)--------
+
+async function challengeFive(chosenChallenge){
+    function askQuestion() {
+    let answerBool;//declaring outside of .then() 
+inquirer
+    .prompt([{
+        type:"confirm",
+        name: "openBox",
+        message:"Will you open the box?"
+    },
+    ])
+    .then((answerschallengeFive) => {
+         answerBool = answerschallengeFive.openBox //sets the value of item answer to the users prompt answer
+         console.log(answerBool)
+        if (answerBool === true) {
+            console.log("You find a new key!")
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
+            console.log(`${lock.doorStats()}`);
+            backToDoor();
+        } else {
+            console.log("Incorrect answer. Try again.");
+            askQuestion(); // Recursively call askQuestion again
+        }
+    });
+}
+askQuestion();
+}
+
+async function challengeSix(chosenChallenge){
+    function askQuestion() {
+    let answerBool;//declaring outside of .then() 
+inquirer
+    .prompt([{
+        type:"confirm",
+        name: "openBox2",
+        message:"Will you open the box?"
+    },
+    ])
+    .then((answerschallengeSix) => {
+         answerBool = answerschallengeSix.openBox2 //sets the value of item answer to the users prompt answer
+         console.log(answerBool)
+        if (answerBool === false) {
+            console.log("You find a new key!")
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
+            console.log(`${lock.doorStats()}`);
+            backToDoor();
+        } else {
+            console.log("Incorrect answer. Try again.");
+            askQuestion(); // Recursively call askQuestion again
+        }
+    });
+}
+askQuestion();
+}
+
 backToDoor()// call at the end to generate your recursive game choices -> game -> choices loop
+
 
 
