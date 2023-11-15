@@ -47,17 +47,19 @@ let updatedIntegrity; // need to declare outside of functions
         }
         if (chosenChallenge ==="3") {
             updatedIntegrity = lock.reduceIntegrity();
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            console.log(`${lock.doorStats()}`);
-            backToDoor();//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            // console.log(`${lock.doorStats()}`);
+            //PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            challengeThree(chosenChallenge);
         
             
         }
         if (chosenChallenge ==="4") {
             updatedIntegrity = lock.reduceIntegrity();
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            console.log(`${lock.doorStats()}`);
-            backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            // console.log(`${lock.doorStats()}`);
+            //PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            challengeFour(chosenChallenge);
         
             
         }
@@ -133,6 +135,34 @@ inquirer
         }
     });
 }
+askQuestion();
+}
+
+
+// Jamie's Challenges (3 and 4)
+
+async function challengeThree(chosenChallenge){
+    function askQuestion(){
+    let answer; //declaring outside of .then()
+        inquirer
+        .prompt([{
+            type:"input",
+            name:"challthree",
+            message:"Which operator will transform the current number into a number that is associated with the devil?",
+        },
+    ])
+    .then((answersChallengeThree) => {
+
+    })
+    
+}
+askQuestion();
+}
+
+async function challengeFour(chosenChallenge){
+    function askQuestion(){
+
+    }
 askQuestion();
 }
 
