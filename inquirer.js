@@ -143,16 +143,19 @@ askQuestion();
 
 async function challengeThree(chosenChallenge){
     function askQuestion(){
+    let operatorAnswer; // declaring outside of .then()
+    let operators = ["+", "-", "*", "/"]
         inquirer
         .prompt([{
-            type:"input",
+            type:"list",
             name:"challthree",
-            message:"Which operator will transform the number 333 (if given the number 2 as well) into a number that is associated with the devil?",
+            choices: operators,
+            message:"You are given the numbers '333' and '2', which operator will transform it into a number that is associated with the devil?",
         },
     ])
     .then((answersChallengeThree) => {
-        const challThree = answersChallengeThree.challThree;
-        if (challThree === "*") {   // Multiplies it 
+         operatorAnswer = answersChallengeThree.challthree;
+        if (operatorAnswer === "*") {   // Multiplies it 
             console.log("Correct! A key appears before you!");
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
             console.log(`${lock.doorStats()}`);
