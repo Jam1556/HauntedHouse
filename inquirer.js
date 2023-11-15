@@ -1,6 +1,7 @@
 
     import inquirer from 'inquirer';
     import { Lock } from "./classes.js"
+    import chalk from 'chalk'
     const lock = new Lock(); //creates Lock Subclass 
     export let playerName; //declares playerName before it is used in start() so the value can be used in greet, while also exporting itself. 
     let availableChallenges = ["1","2","3","4","5","6"] //array of challenges, used later in a list inquirer.
@@ -151,7 +152,8 @@ inquirer
          answerBool = answerschallengeFive.openBox //sets the value of item answer to the users prompt answer
          console.log(answerBool)
         if (answerBool === true) {
-            console.log("You find a new key!")
+            console.log(chalk.blue.bold("You find a new key!"))
+            console.log(chalk.red.bold(" .-.\n(o o) boo!\n| O |\n|   |\n`~~~'"))
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
             console.log(`${lock.doorStats()}`);
             backToDoor();
@@ -190,6 +192,8 @@ inquirer
 }
 askQuestion();
 }
+
+//test comment, remove later.
 
 backToDoor()// call at the end to generate your recursive game choices -> game -> choices loop
 
