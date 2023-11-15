@@ -125,7 +125,7 @@ inquirer
             console.log(`${lock.doorStats()}`);
             backToDoor();
         } else {
-            console.log("Incorrect answer. The lock remains closed.");
+            console.log("Incorrect answer. Try Again!.");
             askQuestion(); // Recursively call askQuestion again
         }
     });
