@@ -1,13 +1,18 @@
 import {playerName} from "./inquirer.js";
 
+
+
+
+
+
 class Door {
     constructor() {
         this.integrity =  90;
     }
 
     doorStats() {
-        if (this.integrity <= 0) {
-            return(`Congratulations ${playerName}, you've escaped!`);}
+        if (this.integrity <= 0) {return(`Congratulations ${playerName}, you've escaped!`);
+            }
             else {
         return `Door integrity currently ${this.integrity}`;}
     }
@@ -22,7 +27,7 @@ class Lock extends Door {
 
         this.integrity -= 15;
         if (this.integrity <= 0) {
-            return(`Congratulations ${playerName}, you've escaped!`);
+            return;
         } else {
             return this.integrity
         }
