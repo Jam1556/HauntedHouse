@@ -193,8 +193,6 @@ inquirer
 askQuestion();
 }
 
-//test comment, remove later.
-
 backToDoor()// call at the end to generate your recursive game choices -> game -> choices loop
 
 
