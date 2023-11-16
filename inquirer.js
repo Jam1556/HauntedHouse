@@ -47,17 +47,19 @@ let updatedIntegrity; // need to declare outside of functions
         }
         if (chosenChallenge ==="3") {
             updatedIntegrity = lock.reduceIntegrity();
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            console.log(`${lock.doorStats()}`);
-            backToDoor();//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            // console.log(`${lock.doorStats()}`);
+            //PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            challengeThree(chosenChallenge);
         
             
         }
         if (chosenChallenge ==="4") {
             updatedIntegrity = lock.reduceIntegrity();
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            console.log(`${lock.doorStats()}`);
-            backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            // console.log(`${lock.doorStats()}`);
+            //PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            challengeFour(chosenChallenge);
         
             
         }
@@ -129,7 +131,6 @@ inquirer
 }
 askQuestion();
 }
-
 
 // Jamie's Challenges (3 and 4)
 
