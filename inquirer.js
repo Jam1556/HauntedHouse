@@ -47,17 +47,19 @@ let updatedIntegrity; // need to declare outside of functions
         }
         if (chosenChallenge ==="3") {
             updatedIntegrity = lock.reduceIntegrity();
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            console.log(`${lock.doorStats()}`);
-            backToDoor();//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            // console.log(`${lock.doorStats()}`);
+            //PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            challengeThree(chosenChallenge);
         
             
         }
         if (chosenChallenge ==="4") {
             updatedIntegrity = lock.reduceIntegrity();
-            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
-            console.log(`${lock.doorStats()}`);
-            backToDoor()//PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            // availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            // console.log(`${lock.doorStats()}`);
+            //PLACEHOLDER PLACEHOLDER PLACEHODLER, code that has been ripped out of the indiviudal challenge functions.
+            challengeFour(chosenChallenge);
         
             
         }
@@ -126,6 +128,68 @@ inquirer
             askQuestion(); // Recursively call askQuestion again
         }
     });
+}
+askQuestion();
+}
+
+
+// Jamie's Challenges (3 and 4)
+
+async function challengeThree(chosenChallenge){
+    function askQuestion(){
+    let operatorAnswer; // declaring outside of .then()
+    let operators = ["+", "-", "*", "/"]
+        inquirer
+        .prompt([{
+            type:"list",
+            name:"challthree",
+            choices: operators,
+            message:"You are given the numbers '333' and '2', which operator will transform it into a number that is associated with the devil?",
+        },
+    ])
+    .then((answersChallengeThree) => {
+         operatorAnswer = answersChallengeThree.challthree;
+        if (operatorAnswer === "*") {   // Multiplies it 
+            console.log("Correct! 666 is the answer, a key has appears before you!");
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            console.log(`${lock.doorStats()}`);
+            backToDoor();
+        } else {
+            console.log("Incorrect, please try again!");
+            askQuestion(); // Goes back to the start of challenge 3
+        }
+    });
+    
+}
+askQuestion(); // Calls the function
+}
+
+async function challengeFour(chosenChallenge){
+    function askQuestion(){
+    let challFourAnswer;
+    let halloweenChoices = ["Oct 31st", "Trick or Treating", "Champions League Final", "Scary Movie 2"]
+    inquirer
+    .prompt([{
+        type:"checkbox",
+        name:"challfour",
+        choices: halloweenChoices,
+        message:"Which of these choices are NOT related to Halloween?"
+    },
+    ])
+    .then((answersChallengeFour) => {
+        challFourAnswer = answersChallengeFour.challfour;
+        if (challFourAnswer == "Champions League Final") {
+            console.log("Correct!, A key has dropped down for you!");
+            availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
+            console.log(`${lock.doorStats()}`);
+            backToDoor();
+        } else {
+            console.log("Incorrect, try again!");
+            askQuestion(); // Will go back around to the start of challenge 4
+        }
+
+    });
+
 }
 askQuestion();
 }
