@@ -149,7 +149,7 @@ async function challengeThree(chosenChallenge){
     .then((answersChallengeThree) => {
          operatorAnswer = answersChallengeThree.challthree;
         if (operatorAnswer === "*") {   // Multiplies it 
-            console.log(chalk.green.bold("Correct! 666 is the answer, a key has appears before you!"));
+            console.log(chalk.green.bold("Correct! 666 is the answer, a key has appeared before you!"));
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
             console.log(`${lock.doorStats()}`);
             backToDoor();
