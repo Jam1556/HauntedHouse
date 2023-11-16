@@ -132,7 +132,6 @@ inquirer
 askQuestion();
 }
 
-
 // Jamie's Challenges (3 and 4)
 
 async function challengeThree(chosenChallenge){
@@ -150,12 +149,12 @@ async function challengeThree(chosenChallenge){
     .then((answersChallengeThree) => {
          operatorAnswer = answersChallengeThree.challthree;
         if (operatorAnswer === "*") {   // Multiplies it 
-            console.log("Correct! 666 is the answer, a key has appears before you!");
+            console.log(chalk.green.bold("Correct! 666 is the answer, a key has appears before you!"));
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
             console.log(`${lock.doorStats()}`);
             backToDoor();
         } else {
-            console.log("Incorrect, please try again!");
+            console.log(chalk.yellowBright.bold("Incorrect, please try again!"));
             askQuestion(); // Goes back to the start of challenge 3
         }
     });
@@ -179,12 +178,12 @@ async function challengeFour(chosenChallenge){
     .then((answersChallengeFour) => {
         challFourAnswer = answersChallengeFour.challfour;
         if (challFourAnswer == "Champions League Final") {
-            console.log("Correct!, A key has dropped down for you!");
+            console.log(chalk.green.bold("Correct!, A key has dropped down for you!"));
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge);
             console.log(`${lock.doorStats()}`);
             backToDoor();
         } else {
-            console.log("Incorrect, try again!");
+            console.log(chalk.yellowBright.bold("Incorrect, try again!"));
             askQuestion(); // Will go back around to the start of challenge 4
         }
 
