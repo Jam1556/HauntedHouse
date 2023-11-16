@@ -1,6 +1,5 @@
 import {playerName} from "./inquirer.js";
-
-
+import chalk from "chalk";
 
 
 
@@ -11,10 +10,10 @@ class Door {
     }
 
     doorStats() {
-        if (this.integrity <= 0) {return(`Congratulations ${playerName}, you've escaped!`);
+        if (this.integrity <= 0) {return`${chalk.yellow.bold.underline(`***=== Congratulations ${playerName}, you've escaped! ===***`)}`;
             }
             else {
-        return `Door integrity currently ${this.integrity}`;}
+        return `${chalk.cyan.inverse(` Door integrity currently ${this.integrity} `)}`;}
     }
 }
 

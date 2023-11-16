@@ -18,7 +18,7 @@
     
     async function greet(){ //greet runs start by awaiting it 
         await start()
-    console.log(`Welcome ${playerName}, to the Haunted Hotel! You must recover 6 keys to unlock the door and leave. The door's integrity will weaken with each lock broken. ${String(lock.doorStats())}`)
+    console.log(chalk.cyan.bold(`Welcome ${chalk.yellow(playerName)}, to the ${chalk.magenta.italic.underline(`Haunted Hotel!`)} You must recover 6 keys to unlock the door and leave. The door's integrity will weaken with each lock broken. ${chalk.inverse(String(lock.doorStats()))}`))
     }
     await greet()
     async function backToDoor(){ //backToDoor runs greet, generates challenge list and loops back to challenge list once one has been complete
@@ -89,12 +89,12 @@ let updatedIntegrity; // need to declare outside of functions
                 .then((answersChallengeTwo) => {
                     const chalTwo = answersChallengeTwo.chalTwo;
                     if (chalTwo.toUpperCase() === "OPEN") { //changes the input to uppercase so no errors
-                        console.log("The lock breaks, and a key falls from it! Lock two is open."); 
+                        console.log(chalk.green.bold("The lock breaks, and a key falls from it! Lock two is open.")); 
                         availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); // removes the challenge you just completed from the array when successful
                         console.log(`${lock.doorStats()}`); // notifies player of current door integrity
                         backToDoor(); //recursive, allows the user to loop back to the inquirer prompt and select another challenge 
                     } else {
-                        console.log("Incorrect answer. Try again!"); 
+                        console.log(chalk.yellowBright.bold("Incorrect answer. Try again!")); 
                         askQuestion(); // Recursively call askQuestion again
                     }
                 });
@@ -119,12 +119,12 @@ inquirer
     .then((answerschallengeOne) => {
          itemAnswer = answerschallengeOne.oddOneOut //sets the value of item answer to the users prompt answer
         if (itemAnswer === "Fairy Dust") {
-            console.log("You find a key underneath the bag of Fairy Dust!")
+            console.log(chalk.green.bold("You find a key underneath the bag of Fairy Dust!"))
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
             console.log(`${lock.doorStats()}`);
             backToDoor();
         } else {
-            console.log("Incorrect answer. The lock remains closed.");
+            console.log(chalk.yellowBright.bold("Incorrect answer. The lock remains closed."));
             askQuestion(); // Recursively call askQuestion again
         }
     });
@@ -210,7 +210,7 @@ inquirer
          answerBool = answerschallengeFive.statue //sets the value of item answer to the users prompt answer. 
          //console.log(answerBool)
         if (answerBool === true) {
-            console.log(chalk.cyan.bold("The sword activates the statue; releasing a new key!"))
+            console.log(chalk.green.bold("The sword activates the statue; releasing a new key!"))
             //console.log(chalk.red.bold(" .-.\n(o o) boo!\n| O |\n|   |\n`~~~'"))
             console.log(chalk.green.bold("  8 8          ,o.\n d8o8azzzzzzzzd   b\n               `o' "))
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
@@ -240,7 +240,7 @@ inquirer
          autopsyAnswer = answerschallengeSix.autopsy //sets the value of item answer to the users prompt answer
          //console.log(autopsyAnswer)
         if (autopsyAnswer === 'stomach') {
-            console.log(chalk.cyan.bold("Nesteled between dirty bandages and rotten flesh; you find a New Key."))
+            console.log(chalk.green.bold("Nesteled between dirty bandages and rotten flesh; you find a New Key."))
             console.log(chalk.green.bold("  8 8          ,o.\n d8o8azzzzzzzzd   b\n               `o' "))
             availableChallenges = availableChallenges.filter(challenge => challenge !== chosenChallenge); 
             console.log(`${lock.doorStats()}`);
